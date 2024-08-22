@@ -1,4 +1,9 @@
 {
 	"name": "rd-training-client",
-	"version": "1.0.0"
+	"version": "1.0.0",
+	"author": "Josh Williams",
+	"description": "Client to call endpoints of rd-training GraphQL API",
+	"dependencies": {
+		"@simpleview/sv-graphql-client": "4.0.0"
+	}
 }
