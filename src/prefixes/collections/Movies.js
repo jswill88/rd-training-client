@@ -7,31 +7,69 @@ class Movies {
 	}
 
 	async find({ fields, context, filter = {}, headers }) {
-		const result = await query({
-			query: `
-				query ($filter: training_movies_find) {
-					training {
-						movies_find(filter: $filter) {
-							${fields}
-						}
-					}
+		if (typeof fields !== string) {
+			throw new Error("'fields' must be included as a string e.g. `{ success, message }`");
+		}
+
+		const queryString = `
+			query ($filter: training_movies_find) {
+				training {
+					movies_find(filter: $filter) ${fields}
 				}
-			`,
-			variables: { filter },
+			}
+		`;
+
+		const variables = { filter };
+
+		return await this._query({ queryString, variables, headers });
+	}
+
+	async insert({ fields, context, input = [], headers }) {
+		if (typeof fields !== string) {
+			throw new Error("'fields' must be included as a string e.g. `{ success, message }`");
+		}
+
+		const queryString = `
+			mutation Insert($input: [training_movies_insert!]!) {
+				training {
+					movies_insert(input: $input) ${fields}
+				}
+			}
+		`;
+
+		const variables = { input };
+
+		return await this._query({ queryString, variables, headers });
+	}
+
+	async remove({ fields, context, filter = {}, headers }) {
+		if (typeof fields !== string) {
+			throw new Error("'fields' must be included as a string e.g. `{ success, message }`");
+		}
+
+		const queryString = `
+			mutation Remove ($filter: training_movies_remove) {
+				training {
+					movies_remove(filter: $filter) ${fields}
+				}
+			}
+		`;
+
+		const variables = { filter };
+
+		return await this._query({ queryString, variables, headers });
+	}
+
+	async _query({ queryString, variables }) {
+		const result = await query({
+			query: queryString,
+			variables,
 			url: this._graphUrl,
 			headers,
 			clean: true,
 		});
 
 		return result;
-	}
-
-	insert() {
-
-	}
-
-	remove() {
-
 	}
 }
 

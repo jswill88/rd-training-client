@@ -5,8 +5,10 @@ class Prefix {
 		this.name = 'training';
 		this._graphUrl = graphUrl;
 		this._graphServer = graphServer;
-		this.movies = new Movies({ graphUrl, graphServer});
+		this.movies = new Movies({ graphUrl, graphServer });
 	}
+
+	
 }
 
 module.exports = {
