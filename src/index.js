@@ -1,5 +1,3 @@
 const { Prefix } = require('./prefixes/YourPrefix');
 
-module.exports = {
-	Prefix
-}
+module.exports = { Prefix }

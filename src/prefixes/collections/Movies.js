@@ -30,7 +30,7 @@ class Movies {
 		}
 
 		const queryString = `
-			mutation Insert($input: [training_movies_insert!]!) {
+			mutation ($input: [training_movies_insert!]!) {
 				training {
 					movies_insert(input: $input) ${fields}
 				}
@@ -48,7 +48,7 @@ class Movies {
 		}
 
 		const queryString = `
-			mutation Remove ($filter: training_movies_remove) {
+			mutation ($filter: training_movies_remove) {
 				training {
 					movies_remove(filter: $filter) ${fields}
 				}
@@ -60,7 +60,7 @@ class Movies {
 		return await this._query({ queryString, variables, headers });
 	}
 
-	async _query({ queryString, variables }) {
+	async _query({ queryString, variables, headers }) {
 		const result = await query({
 			query: queryString,
 			variables,
@@ -73,6 +73,4 @@ class Movies {
 	}
 }
 
-module.exports = {
-	Movies
-}
+module.exports = { Movies }
