@@ -1,7 +1,7 @@
 const { Movies } = require('./collections/Movies');
 const { People } = require('./collections/People');
 
-class Training {
+class TrainingPrefixes {
 	constructor({ graphUrl, graphServer }) {
 		this.name = 'training';
 		this._graphUrl = graphUrl;
@@ -11,4 +11,6 @@ class Training {
 	}
 }
 
-module.exports = { Training }
+module.exports = {
+	TrainingPrefixes
+}

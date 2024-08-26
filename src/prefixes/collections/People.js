@@ -8,39 +8,61 @@ class People {
 	}
 
 	async find({ fields, context, filter, headers }) {
-		return await query({
+		const variables = {
+			filter
+		}
+
+		const response = await query({
 			query: `
 				query ($filter: training_people_find) {
 					training {
-						people_find(filter: $filter) ${fields}
+						people_find(filter: $filter) {
+							${fields}
+						}
 					}
 				}
 			`,
-			variables: { filter },
+			variables,
 			url: this._graphUrl,
 			headers,
 			clean: true,
+			key: 'training.people_find'
 		});
+
+		return response;
 	}
 
 	async insert({ fields, context, input, headers }) {
-		return await query({
+		const variables = {
+			input
+		}
+
+		const response = await query({
 			query: `
 				mutation ($input: [training_people_insert!]!) {
 					training {
-						people_insert(input: $input) ${fields}
+						people_insert(input: $input) {
+							${fields}
+						}
 					}
 				}
 			`,
-			variables: { input },
+			variables,
 			url: this._graphUrl,
 			headers,
 			clean: true,
+			key: 'training.people_insert'
 		});
+
+		return response;
 	}
 
 	async remove({ fields, context, filter, headers }) {
-		return await query({
+		const variables = {
+			filter
+		}
+
+		const response = await query({
 			query: `
 				mutation ($filter: training_people_remove) {
 					training {
@@ -48,12 +70,17 @@ class People {
 					}
 				}
 			`,
-			variables: { filter },
+			variables,
 			url: this._graphUrl,
 			headers,
 			clean: true,
+			key: 'training.people_remove'
 		});
+
+		return response;
 	}
 }
 
-module.exports = { People }
+module.exports = {
+	People
+}

@@ -8,52 +8,81 @@ class Movies {
 	}
 
 	async find({ fields, context, filter, headers }) {
-		return await query({
+		const variables = {
+			filter
+		};
+
+		const response = await query({
 			query: `
 				query ($filter: training_movies_find) {
 					training {
-						movies_find(filter: $filter) ${fields}
+						movies_find(filter: $filter) {
+							${fields}
+						}
 					}
 				}
 			`,
-			variables: { filter },
+			variables,
 			url: this._graphUrl,
 			headers,
 			clean: true,
+			key: 'training.movies_find'
 		});
+
+		return response;
 	}
 
 	async insert({ fields, context, input, headers }) {
-		return await query({
+		const variables = {
+			input
+		}
+
+		const response = await query({
 			query: `
 				mutation ($input: [training_movies_insert!]!) {
 					training {
-						movies_insert(input: $input) ${fields}
+						movies_insert(input: $input) {
+							${fields}
+						}
 					}
 				}
 			`,
-			variables: { input },
+			variables,
 			url: this._graphUrl,
 			headers,
 			clean: true,
+			key: 'training.movies_insert'
 		});
+
+		return response;
 	}
 
 	async remove({ fields, context, filter, headers }) {
-		return await query({
+		const variables = {
+			filter
+		}
+
+		const response = await query({
 			query: `
 				mutation ($filter: training_movies_remove) {
 					training {
-						movies_remove(filter: $filter) ${fields}
+						movies_remove(filter: $filter) {
+							${fields}
+						}
 					}
 				}
 			`,
-			variables: { filter },
+			variables,
 			url: this._graphUrl,
 			headers,
 			clean: true,
+			key: 'training.movies_remove'
 		});
+
+		return response;
 	}
 }
 
-module.exports = { Movies }
+module.exports = {
+	Movies
+}

@@ -1,3 +1,5 @@
-const { Training } = require('./prefixes/YourPrefix');
+const { TrainingPrefixes } = require('./prefixes/TrainingPrefixes');
 
-module.exports = { Training }
+module.exports = {
+	TrainingPrefixes
+}
