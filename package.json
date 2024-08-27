@@ -3,7 +3,9 @@
 	"version": "1.0.0",
 	"author": "Josh Williams",
 	"description": "Client to call endpoints of rd-training GraphQL API",
+	"main": "src/index.js",
 	"dependencies": {
+		"graphql": "16.9.0",
 		"@simpleview/sv-graphql-client": "4.0.0"
 	}
 }
