@@ -1,5 +1,7 @@
-const { TrainingPrefixes } = require('./prefixes/TrainingPrefixes');
+const { TrainingPrefixes, MoviesPrefix, PeoplePrefix } = require('./prefixes/TrainingPrefixes');
 
 module.exports = {
-	TrainingPrefixes
+	TrainingPrefixes,
+	MoviesPrefix,
+	PeoplePrefix
 }
