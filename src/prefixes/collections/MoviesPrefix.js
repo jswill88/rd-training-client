@@ -1,8 +1,8 @@
 const { query } = require("@simpleview/sv-graphql-client");
 
-class People {
+class MoviesPrefix {
 	constructor({ graphUrl, graphServer }) {
-		this.name = 'people';
+		this.name = 'movies';
 		this._graphUrl = graphUrl;
 		this._graphServer = graphServer;
 	}
@@ -10,13 +10,13 @@ class People {
 	async find({ fields, context, filter, headers }) {
 		const variables = {
 			filter
-		}
+		};
 
 		const response = await query({
 			query: `
-				query ($filter: training_people_find) {
+				query ($filter: training_movies_find) {
 					training {
-						people_find(filter: $filter) {
+						movies_find(filter: $filter) {
 							${fields}
 						}
 					}
@@ -26,7 +26,7 @@ class People {
 			url: this._graphUrl,
 			headers,
 			clean: true,
-			key: 'training.people_find'
+			key: 'training.movies_find'
 		});
 
 		return response;
@@ -39,9 +39,9 @@ class People {
 
 		const response = await query({
 			query: `
-				mutation ($input: [training_people_insert!]!) {
+				mutation ($input: [training_movies_insert!]!) {
 					training {
-						people_insert(input: $input) {
+						movies_insert(input: $input) {
 							${fields}
 						}
 					}
@@ -51,7 +51,7 @@ class People {
 			url: this._graphUrl,
 			headers,
 			clean: true,
-			key: 'training.people_insert'
+			key: 'training.movies_insert'
 		});
 
 		return response;
@@ -64,9 +64,11 @@ class People {
 
 		const response = await query({
 			query: `
-				mutation ($filter: training_people_remove) {
+				mutation ($filter: training_movies_remove) {
 					training {
-						people_remove(filter: $filter) ${fields}
+						movies_remove(filter: $filter) {
+							${fields}
+						}
 					}
 				}
 			`,
@@ -74,7 +76,7 @@ class People {
 			url: this._graphUrl,
 			headers,
 			clean: true,
-			key: 'training.people_remove'
+			key: 'training.movies_remove'
 		});
 
 		return response;
@@ -82,5 +84,5 @@ class People {
 }
 
 module.exports = {
-	People
+	MoviesPrefix
 }
